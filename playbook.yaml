@@ -1,45 +1,24 @@
-- name: install docker 
+- name: Setup Project 
   hosts: myhost
   remote_user: root
+  roles:
+    - setup_project
 
-  tasks:
-  - name: Install aptitude
-    apt:
-      name: aptitude
-      state: latest
-      update_cache: true
-  - name: Install required system packages
-    apt:
-      pkg:
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - software-properties-common
-        - python3-pip
-        - virtualenv
-        - python3-setuptools
-      state: latest
-      update_cache: true
+- name: Run mariadb 
+  hosts: myhost
+  remote_user: root
+  roles:
+    - start_mariadb 
 
-  - name: Add Docker GPG apt Key
-    apt_key:
-      url: https://download.docker.com/linux/ubuntu/gpg
-      state: present
+- name: Run nginx 
+  hosts: myhost
+  remote_user: root
+  roles:
+    - start_nginx 
 
-  - name: Add Docker Repository
-    apt_repository:
-      repo: "deb https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
-      state: present
-
-  - name: Install multiple packages
-    apt:
-      name: "{{ item }}"
-      state: present
-    with_items:
-      - docker-ce 
-      - docker-ce-cli
-      - containerd.io
-      - docker-buildx-plugin
-      - docker-compose-plugin
-
+- name: Run wordpress 
+  hosts: myhost
+  remote_user: root
+  roles:
+    - start_wordpress
 

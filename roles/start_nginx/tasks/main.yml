@@ -1,0 +1,5 @@
+- name: Start nginx 
+  ansible.builtin.shell:  
+    cmd: docker compose up -d --build nginx
+    chdir: /root/app/srcs
+     

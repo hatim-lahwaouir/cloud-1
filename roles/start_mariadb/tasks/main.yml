@@ -1,0 +1,5 @@
+- name: Start mariadb 
+  ansible.builtin.shell: 
+    cmd: docker compose up -d --build mariadb
+    chdir: /root/app/srcs
+    

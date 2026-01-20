@@ -1,0 +1,56 @@
+
+services:
+  nginx:
+    image: nginx
+    env_file: .env
+    depends_on:
+      - wordpress
+    build: ./requirements/nginx
+    container_name: nginx
+    ports:
+      - "443:443"
+    volumes:
+      - wp:/var/www/wordpress
+    networks:
+      - my_network
+    restart: on-failure
+  mariadb:
+    image: mariadb
+    env_file: .env
+    build: ./requirements/mariadb
+    container_name: mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - my_network
+    expose:
+      - "3306"
+    restart: on-failure
+  wordpress:
+    image: wordpress
+    env_file: .env
+    build: ./requirements/wordpress
+    container_name: wordpress
+    volumes:
+      - wp:/var/www/wordpress
+    networks:
+      - my_network
+    expose:
+      - "9000"
+    restart: on-failure
+volumes:
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ytoumi/data/wp
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ytoumi/data/db
+networks:
+  my_network:
+    name: my_network
