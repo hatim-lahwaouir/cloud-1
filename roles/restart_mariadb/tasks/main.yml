@@ -1,0 +1,5 @@
+- name: Restart mariadb 
+  ansible.builtin.shell:  
+    cmd: docker compose restart mariadb 
+    chdir: /root/app/srcs
+ 

@@ -1,0 +1,5 @@
+- name: Restart wordpress 
+  ansible.builtin.shell:  
+    cmd: docker compose restart wordpress 
+    chdir: /root/app/srcs
+ 

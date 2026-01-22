@@ -1,0 +1,6 @@
+- name: Restart mariadb 
+  hosts: myhost
+  remote_user: root
+  roles:
+    - restart_mariadb
+

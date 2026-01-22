@@ -1,0 +1,65 @@
+
+services:
+  
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    build: ./requirements/nginx/
+    depends_on:
+      - wordpress
+    volumes:
+      - vol-wp:/app
+    ports:
+      - "443:443"
+    networks:
+      - netw
+
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    build: ./requirements/mariadb/
+    volumes:
+      - vol-db:/var/lib/mysql
+    env_file:
+      - .env
+    networks:
+      - netw
+
+
+
+  wordpress:
+    image: wordpress
+    restart: always
+    build: ./requirements/wordpress/
+    volumes:
+      - vol-wp:/app
+    container_name: wordpress
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    networks:
+      - netw
+
+
+volumes:
+  vol-wp:
+    name: wp_vol
+    driver: local
+    driver_opts:
+      type: bind
+      device: /root/data/wp/
+      o: bind
+
+  vol-db:
+    name: db_vol
+    driver: local
+    driver_opts:
+      type: bind
+      device: /root/data/db/
+      o: bind
+
+networks:
+  netw:

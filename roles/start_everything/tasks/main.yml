@@ -70,4 +70,18 @@
     src: env
     dest: /root/app/srcs/.env
 
+- name: Create directory of wordpress volume
+  ansible.builtin.file:
+    path: /root/data/wp
+    state: directory
 
+- name: Create directory of database volume
+  ansible.builtin.file:
+    path: /root/data/db 
+    state: directory
+ 
+- name: Start everything  
+  ansible.builtin.shell: 
+    cmd: docker compose up -d --build 
+    chdir: /root/app/srcs
+ 

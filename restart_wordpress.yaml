@@ -1,0 +1,5 @@
+- name: Restart wordpress 
+  hosts: myhost
+  remote_user: root
+  roles:
+    - restart_wordpress

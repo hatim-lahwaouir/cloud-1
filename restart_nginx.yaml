@@ -1,0 +1,5 @@
+- name: Restart nginx 
+  hosts: myhost
+  remote_user: root
+  roles:
+    - restart_nginx
