@@ -1,8 +1,8 @@
-SECOND_USER=flan
-SECOND_PASSWORD=flan123ferda
-SQL_DATABASE=mohamad
-SQL_USER=mohamadrojola
-SQL_PASSWORD=mohamadrojola
-SQL_ROOT_PASSWORD=mohamadrojolaroot
-SQL_ROOT_PASSWORD=mohamadrojolaroot
-
+User=hatim
+Password=hatim
+DB_Name=db
+ADMINE_NAME=admine
+ADMINE_PASS=admine
+URL=138.68.98.21.nip.io
+ADMINE_EMAIL=abc@miloki.me
+User_email=user@miloki.me

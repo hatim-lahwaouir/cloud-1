@@ -1,14 +1,28 @@
-.PHONY: kill build down
+all: up
+
+User=hlahwaou
 
 
-kill:
-	docker compose -f ./srcs/docker-compose.yml kill
+.PHONY = down clean stop up status start
+
 
 up:
-	docker compose -f ./srcs/docker-compose.yml build && docker compose -f ./srcs/docker-compose.yml create && docker compose -f ./srcs/docker-compose.yml start
+	docker compose -f ./srcs/docker-compose.yml up -d --build
+
+start:
+	docker compose -f ./srcs/docker-compose.yml start
+stop:
+	docker compose -f ./srcs/docker-compose.yml stop
+
+
 
 down:
 	docker compose -f ./srcs/docker-compose.yml down
 
-logs:
-	docker compose -f ./srcs/docker-compose.yml logs
+clean: down
+	sudo rm -rf /home/$(User)/data/wp/*
+	sudo rm -rf /home/$(User)/data/db/*
+	
+
+status:
+	docker ps

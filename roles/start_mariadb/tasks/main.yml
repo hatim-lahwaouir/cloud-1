@@ -1,3 +1,8 @@
+- name: Create directory of database volume
+  ansible.builtin.file:
+    path: /root/data/db 
+    state: directory
+ 
 - name: Start mariadb 
   ansible.builtin.shell: 
     cmd: docker compose up -d --build mariadb
