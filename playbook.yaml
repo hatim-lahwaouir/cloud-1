@@ -10,15 +10,15 @@
   roles:
     - start_mariadb 
 
-- name: Run nginx 
-  hosts: myhost
-  remote_user: root
-  roles:
-    - start_nginx 
-
 - name: Run wordpress 
   hosts: myhost
   remote_user: root
   roles:
     - start_wordpress
+
+- name: Run nginx 
+  hosts: myhost
+  remote_user: root
+  roles:
+    - start_nginx 
 

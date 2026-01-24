@@ -1,3 +1,8 @@
+- name: Create directory of wordpress volume
+  ansible.builtin.file:
+    path: /root/data/wp
+    state: directory
+
 - name: Start wordpress 
   ansible.builtin.shell:
     cmd: docker compose up -d --build wordpress
