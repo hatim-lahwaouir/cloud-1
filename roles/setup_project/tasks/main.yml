@@ -9,10 +9,7 @@
 - name: Ensure dependencies are installed
   ansible.builtin.package:
     name:
-      - bc
       - curl
-      - expect
-      - git
       - ca-certificates
     state: present
 
